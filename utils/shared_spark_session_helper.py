@@ -20,6 +20,10 @@ import tempfile
 import uuid
 from pathlib import Path
 
+# 因为配置了SPARK_PYTHON, 因此这里跑代码的时候都会使用本地安装的spark, 而不是pyspark内部的jvm, 因此这里要加上findspark.init()
+import findspark
+findspark.init()
+
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
@@ -71,9 +75,9 @@ class SharedSparkSessionHelper:
         # After Each
         self.__temporary_path.cleanup()
 
-        jvm_session = self.spark_session._jvm.SparkSession.getActiveSession().get()   # pylint: disable=W0212
-        jvm_session.sharedState().cacheManager().clearCache()
-        jvm_session.sessionState().catalog().reset()
+        # jvm_session = self.spark_session._jvm.SparkSession.getActiveSession().get()   # pylint: disable=W0212
+        # jvm_session.sharedState().cacheManager().clearCache()
+        # jvm_session.sessionState().catalog().reset()
 
     @classmethod
     def teardown_class(cls):

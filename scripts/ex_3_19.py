@@ -1,5 +1,6 @@
+import findspark
+findspark.init()
 from pyspark.context import SparkContext
-
 
 class SearchFunctions(object):
     def __init__(self, query):
