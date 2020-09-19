@@ -1,2 +1,4 @@
 metastore_db
 *.log
+metastore_db
+spark-warehouse

@@ -86,5 +86,16 @@ class TestChapter5Job(SharedSparkSessionHelper):
         df = self.spark_session.read.table("dl_cpc.cpc_basedata_adx_event")
         df.show(truncate=False)
 
+    def test_ex5_30(self):
+        rows = self.spark_session.sql("""
+        select searchid, create_source,day,hour,minute timestamp,day from dl_cpc.cpc_basedata_adx_event where day='2020-09-16' 
+        and  hour=18 
+        limit 10
+        """)
+        for row in rows.take(10):
+            print(row)
+            # print(row.searchid, row.create_source)
+
+
 
 
