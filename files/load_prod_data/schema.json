@@ -1,0 +1,11 @@
+{
+  "searchid": "string",
+  "ideaid": "int",
+  "price": "int",
+  "ctr": "bigint",
+  "cpm": "bigint",
+  "floorbid": "float",
+  "day": "string",
+  "hour": "string",
+  "minute": "string"
+}
