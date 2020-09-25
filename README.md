@@ -45,6 +45,7 @@
     2. 列的值不能包含逗号, 原因同上
     3. 必须将分区字段按从大到小的粒度放在列的最后
     4. 若有环境问题本地跑不通的, 找杨恺解决
+    
 5. 使用情况
     
     目前该工具已通过杨恺的多次实战, 导入过cpc_bd_sdk_show_v1表和cpc_basedata_click_event表的生产数据, 用于主题表的本地测试: dl_cpc.dws_cpc_bd_sdk_show_daily的实战(http://corp-dc-kepler.qutoutiao.net/kepler-vue/#/?type=Hive%20SQL&name=dl_cpc.dws_cpc_bd_sdk_show_daily), 欢迎大家尝试使用, 也可以作为测试同学提高的学习模板
