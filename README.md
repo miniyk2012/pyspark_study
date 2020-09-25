@@ -2,7 +2,7 @@
 
 
 
-## qe的数据导入CDH环境大数据工具:
+## 生产导入CDH环境大数据工具:
 0. 功能: 支持生产上任意分区表的任意指定列导入到测试表
 1. 原理: 从qe查询出要导入的数据, 指定字段类型, 用pyspark读取成dataframe, 调用CDH的hive thrift2接口将dataframe写入测试表, 并自动动态分区
 2. prerequisit: 
