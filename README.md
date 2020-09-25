@@ -11,7 +11,7 @@
     * python3.6
 3. 操作步骤
     * 在CDH环境建表: dl_cpc.cpc_bd_sdk_show_v1
-    * 查询qe, 下载为csv文件, 放到项目中的files/load_prod_data中, cpc_bd_sdk_show_v1.csv:
+    * 查询qe, 下载为csv文件, 放到files/load_prod_data/中, cpc_bd_sdk_show_v1.csv:
     
     ```csv
     searchid,src,slotid,mediaid,dsp_show,day,hour,mm
@@ -19,7 +19,7 @@
     ...
     ```
     
-    * 编写对应字段的schema配置, cpc_bd_sdk_show_v1_schema.json:
+    * 编写对应字段的schema配置, 放到files/load_prod_data/中, cpc_bd_sdk_show_v1_schema.json:
     ```json
     {
       "searchid": "string",
