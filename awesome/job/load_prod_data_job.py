@@ -74,6 +74,7 @@ class LoadProdDataJob:
     def run(self):
         schema = self.get_schema(self.schema_path)
         tmpdf = self.spark_session.read.csv(self.file_path, header=True, schema=schema)
+        tmpdf.printSchema()
         tmpdf.show()
         tmpdf.write.partitionBy(*self.partition_columns).mode('overwrite').parquet(self.dfs_path)
         self.spark_session.sql(f'msck repair table {self.database}.{self.target_table}')
@@ -83,10 +84,13 @@ if __name__ == '__main__':
     file_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1.csv'
     dfs_file_path = 'hdfs://zjkb-cpc-backend-bigdata-qa-01:8020/user/hive/warehouse/dl_cpc.db/cpc_basedata_bidsdk_event/event_type=show'
     schema_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1_schema.json'
-    job = LoadProdDataJob('dl_cpc',
-                          'cpc_bd_sdk_show_v1',
+    database = 'dl_cpc'
+    table = 'cpc_bd_sdk_show_v1'
+    partition_columns = ['day', 'hour', 'mm']
+    job = LoadProdDataJob(database,
+                          table,
                           file_path,
-                          ['day', 'hour', 'mm'],
+                          partition_columns,
                           dfs_file_path,
                           schema_path)
     job.run()
