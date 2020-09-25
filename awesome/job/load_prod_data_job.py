@@ -7,11 +7,12 @@ import os
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, LongType, IntegerType, FloatType, BooleanType, \
-    DoubleType
+    DoubleType, ShortType
 
 type_map = {
     'int': IntegerType(),
     'bigint': LongType(),
+    'smallint': ShortType(),
     'float': FloatType(),
     'double': DoubleType(),
     'string': StringType(),
@@ -73,19 +74,19 @@ class LoadProdDataJob:
     def run(self):
         schema = self.get_schema(self.schema_path)
         tmpdf = self.spark_session.read.csv(self.file_path, header=True, schema=schema)
-        tmpdf.write.partitionBy(*self.partition_columns).mode('overwrite').parquet(self.dfs_path + self.target_table)
+        tmpdf.show()
+        tmpdf.write.partitionBy(*self.partition_columns).mode('overwrite').parquet(self.dfs_path)
         self.spark_session.sql(f'msck repair table {self.database}.{self.target_table}')
 
 
 if __name__ == '__main__':
-    file_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_basedata_click_event_11_10.csv'
-    # dfs_path = '/usr/local/spark-2.4.7-bin-hadoop2.6/conf/spark-warehouse/spark-warehouse/test.db/'
-    dfs_path = 'hdfs://zjkb-cpc-backend-bigdata-qa-01:8020/user/hive/warehouse/dl_cpc.db/'
-    schema_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/schema.json'
+    file_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1.csv'
+    dfs_file_path = 'hdfs://zjkb-cpc-backend-bigdata-qa-01:8020/user/hive/warehouse/dl_cpc.db/cpc_basedata_bidsdk_event/event_type=show'
+    schema_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1_schema.json'
     job = LoadProdDataJob('dl_cpc',
-                          'cpc_basedata_click_event',
+                          'cpc_bd_sdk_show_v1',
                           file_path,
-                          ['day', 'hour', 'minute'],
-                          dfs_path,
+                          ['day', 'hour', 'mm'],
+                          dfs_file_path,
                           schema_path)
     job.run()

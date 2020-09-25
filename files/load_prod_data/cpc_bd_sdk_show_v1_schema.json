@@ -1,0 +1,10 @@
+{
+  "searchid": "string",
+  "src": "string",
+  "slotid": "string",
+  "mediaid": "string",
+  "dsp_show": "smallint",
+  "day": "string",
+  "hour": "string",
+  "mm": "string"
+}
