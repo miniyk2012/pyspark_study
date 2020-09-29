@@ -81,12 +81,12 @@ class LoadProdDataJob:
 
 
 if __name__ == '__main__':
-    file_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1.csv'
-    dfs_file_path = 'hdfs://zjkb-cpc-backend-bigdata-qa-01:8020/user/hive/warehouse/dl_cpc.db/cpc_basedata_bidsdk_event/event_type=show'
-    schema_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_bd_sdk_show_v1_schema.json'
+    file_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_basedata_bidsdk_log.csv'
+    dfs_file_path = 'hdfs://zjkb-cpc-backend-bigdata-qa-01:8020/user/hive/warehouse/dl_cpc.db/cpc_basedata_bidsdk_log'
+    schema_path = '/Users/admin/Documents/pythonprojects/pyspark_study/files/load_prod_data/cpc_basedata_bidsdk_log_schema.json'
     database = 'dl_cpc'
-    table = 'cpc_bd_sdk_show_v1'
-    partition_columns = ['day', 'hour', 'mm']
+    table = 'cpc_basedata_bidsdk_log'
+    partition_columns = ['day', 'hour', 'minute']
     job = LoadProdDataJob(database,
                           table,
                           file_path,

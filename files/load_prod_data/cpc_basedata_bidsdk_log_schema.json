@@ -1,0 +1,8 @@
+{
+  "log_timestamp": "bigint",
+  "ip": "string",
+  "raw": "string",
+  "day": "string",
+  "hour": "string",
+  "minute": "string"
+}
