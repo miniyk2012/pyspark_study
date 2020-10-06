@@ -22,9 +22,12 @@ from pathlib import Path
 
 # 因为配置了SPARK_PYTHON, 因此这里跑代码的时候都会使用本地安装的spark, 而不是pyspark内部的jvm, 因此这里要加上findspark.init()
 import findspark
-findspark.init()
+try:
+    findspark.init()
+except ValueError:
+    pass
 
-from pyspark import SparkConf
+from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 
 
@@ -64,7 +67,7 @@ class SharedSparkSessionHelper:
             .config(conf=cls.spark_conf()) \
             .enableHiveSupport() \
             .getOrCreate()
-        cls.spark_context = cls.spark_session.sparkContext
+        cls.spark_context: SparkContext = cls.spark_session.sparkContext
 
     def setup_method(self):
         # Before Each
